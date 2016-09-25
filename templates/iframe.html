@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    {% load staticfiles %}
+  <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+    <link rel="stylesheet" href="http://localhost:8888/api/static/css/bootstrap.css">
+
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
+    <link rel="stylesheet" href="http://localhost:8888/api/static/main.css">
+
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="Brand" src="http://localhost:8888/api/static/img/logo.png" height="30" width="100">
+      </a>
+
+
+    </div>
+
+  </div>
+</nav>
+<div class="container">
+<div class="row">
+<div id="exTab3" class="container">
+<ul  class="nav nav-pills" style="list-style: none;">
+      <li class="active">
+        <a  href="#1b" data-toggle="tab"><img src="http://localhost:8888/api/static/img/mpesa.jpg" height="50" width="100">  </a>
+      </li>
+      <li><a href="#2b" data-toggle="tab">Api Credentials</a>
+      </li>
+      <li><a href="#3b" data-toggle="tab">Logs</a>
+      </li>
+
+    </ul>
+
+      <div class="tab-content clearfix">
+        <div class="tab-pane active" id="1b">
+        <p>
+        <p>Pay via mpesa <br>
+        Enter amount<br>
+        Enter phone number as 254700000<br>
+        </p>
+        <form action="http://127.0.0.1:8000/mpesa/" method="post">
+   <input type='hidden' name='csrfmiddlewaretoken' value="jdwjwjefjwdjqwølksqøwkop2j3ofje" />
+
+        <input type="text" name="amount" value="{{amount}}">
+        <br><br>
+        <input type="text" name="phone_number" placeholder="254722000000">
+        <br><br>
+        <input type="submit" name="submit" value="submit">
+
+        </form>
+
+
+        </p>
+        </div>
+        <div class="tab-pane" id="2b">
+<p>Use this Keys to authenicate your request:</p>
+Api Key &nbsp;: &nbsp;{{api_keys}}  <br>
+Api Secret &nbsp;: &nbsp;{{api_secret}}
+
+        </div>
+        <div class="tab-pane" id="3b">
+          <h3>We applied clearfix to the tab-content to rid of the gap between the tab and the content</h3>
+        </div>
+
+      </div>
+  </div>
+
+
+</div>
+
+</div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
+    <script type="text/javascript" src="http://localhost:8888/api/static/js/bootstrap.js"></script>
+
+</body>
+</html>
