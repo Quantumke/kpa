@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    {% load staticfiles %}
+  <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+  <link rel="stylesheet" href="{% static "css/bootstrap-theme.min.css" %}">
+    <link rel="stylesheet" href="{% static "main.css" %}">
+
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="Brand" src="{% static "img/logo.png" %}" height="30" width="100">
+      </a>
+
+
+    </div>
+     <div class="logout">
+
+     {% if user and not user.is_anonymous %}
+     <span> {{ user.get_full_name|default:user.username }}</span>
+     &nbsp;
+        <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+         {% else %}
+         <span>Login</span>
+   {% endif %}
+
+
+ </div>
+  </div>
+</nav>
+{% if user and not user.is_anonymous %}
+
+<div class="container">
+<div class="row">
+<div id="exTab3" class="container">
+<ul  class="nav nav-pills">
+      <li class="active">
+        <a  href="#1b" data-toggle="tab">How It works</a>
+      </li>
+      <li><a href="#2b" data-toggle="tab">Api Credentials</a>
+      </li>
+      <li><a href="#3b" data-toggle="tab">Logs</a>
+      </li>
+
+    </ul>
+
+      <div class="tab-content clearfix">
+        <div class="tab-pane active" id="1b">
+
+<div class="col-md-6">
+<p>Using Php </p>
+ <p>
+
+$url = 'http://pay.karibupay.co.ke/invoke/';<br>
+$fields = array(<br>
+    'api_key' => 'api_key',<br>
+    'api_secret' => 'api_secret',<br>
+    'amount' => 'amount'<br>
+    'call_back_url' => 'call_back_url'<br>
+);<br>
+
+foreach($fields as $key=>$value) { $fields_string .= <br>$key.'='.$value.'&'; }<br>
+rtrim($fields_string, '&');<br>
+
+$ch = curl_init();<br>
+
+curl_setopt($ch,CURLOPT_URL, $url);<br>
+curl_setopt($ch,CURLOPT_POST, count($fields));<br>
+curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);<br>
+
+$result = curl_exec($ch);<br>
+
+curl_close($ch);<br>
+</p>
+</div>
+<div class="col-md-6">
+<p>Using Python </p>
+<p>
+
+buf = io.BytesIO()<br>
+  c = pycurl.Curl()<br>
+  c.setopt(c.URL, 'http://127.0.0.1:8000/invoke/')<br>
+  c.setopt(c.WRITEFUNCTION, buf.write)<br>
+  c.setopt(c.POSTFIELDS, 'amount=100&amp;api_key=3413-4198-6419-7575')<br>
+  c.setopt(c.VERBOSE, True)<br>
+  c.perform()<br>
+  a= buf.getvalue()<br>
+  print(a)<br>
+  buf.close()<br>
+  <span style="color:red">
+  #MUST ADD THIS LINE  <br>
+  return HttpResponse(a)</span><br>        </p>
+</div>
+
+        </div>
+        <div class="tab-pane" id="2b">
+        <p>Api Key: {{api_keys}} </p>
+        <p>Api Secret : {{api_secret}} </p>
+
+        </div>
+        <div class="tab-pane" id="3b">
+        You Have no logs Yet
+        </div>
+
+      </div>
+
+</div>
+
+</div>
+{% else %}
+   {% endif %}
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
+
+</body>
+</html>
