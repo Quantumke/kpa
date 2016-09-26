@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LOGIN SANDBOX</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    {% load staticfiles %}
+	<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+	<link rel="stylesheet" href="{% static "css/bootstrap-theme.min.css" %}">
+		<link rel="stylesheet" href="{% static "main.css" %}">
+
+
+
+
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="Brand" src="{% static "img/logo.png" %}" height="30" width="100">
+      </a>
+
+
+    </div>
+     <div class="logout">{% if user and not user.is_anonymous %}
+     <span> {{ user.get_full_name|default:user.username }}</span>
+     &nbsp;
+        <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+         {% else %}
+         <span>Login</span>
+   {% endif %}
+
+
+ </div>
+  </div>
+</nav>
+ <div>
+ <h1 style="text-align:center;margin-bottom: 100px;">Karibu Pay Beta</h1>
+
+
+ <div style="">
+
+   {% if user and not user.is_anonymous %}
+
+<div class="container">
+<div class="row">
+<h3>Please complete the following fields</h3>
+   <form action="/sub/" method="post">
+   {% csrf_token %}
+     <input  type="hidden" name="username" value="{{ user.get_username }}">
+     <input type="hidden" name="first_name" value=" {{ user.get_full_name|default:user.username }}">
+     <input type="hidden" id="_api_keys" name="api_keys">
+     <input type="hidden" id="_api_secret" name="api_secret">
+     <input type="hidden" id="_confirmation_code" name="confirmation_code">
+<div class="col-md-3">
+   <input class="user-field" type="email" name="email" placeholder="Please Enter Your Email" >
+</div>
+
+
+
+
+<div class="col-md-3">
+   <input class="user-field" type="text" name="phone" placeholder="Please Enter Your Phone Number" >
+</div>
+
+<div class="col-md-3">
+   <input class="user-field" type="text" name="call_back_url" placeholder="Enter a CallBack URL" >
+</div>
+
+<div class="col-md-12" style="margin-top:40px;">
+   <button>Submit</button>
+</div>
+
+
+
+
+
+
+   </form>
+
+</div>
+</div>
+
+   {% else %}
+      <ul style="list-style: none;">
+
+     <li class="list_logo" style="margin-left: 37%;">
+       <a class="logo" href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">
+       <img src="{% static "img/google.png" %}" height="30" width="120">
+       </a>
+     </li>
+      <li class="list_logo" style="margin-left: 40px;">
+       <a class="logo" href="{% url 'social:begin' 'github' %}?next={{ request.path }}">
+       <img src="{% static "img/github.png" %}" height="30" width="120">
+       </a>
+     </li>
+   {% endif %}
+   </ul>
+ </div>
+ </div>
+ <script type="text/javascript">
+
+	a=Math.floor((Math.random() * 10000) + 1);
+	b=Math.floor((Math.random() * 10000) + 1);
+	c=Math.floor((Math.random() * 10000) + 1);
+	d=Math.floor((Math.random() * 10000) + 1);
+	e=Math.floor((Math.random() * 10000) + 1);
+	var api_keys=[a,b,c,d]
+	var api_keys=api_keys.join('-')
+	console.log(api_keys)
+	var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+=";
+
+    for( var i=0; i < 50; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    console.log(text)
+    document.getElementById('_api_keys').value = api_keys;
+    document.getElementById('_api_secret').value = text;
+    document.getElementById('_confirmation_code').value = e;
+
+
+</script>
+ <script type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
+
+</body>
+</html>
