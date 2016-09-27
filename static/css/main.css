@@ -1,0 +1,30 @@
+.logo{
+	text-decoration: none;
+}
+.list_logo{
+	float: left;
+}
+.logout{
+	float: right;
+	font-style: 0.4em;
+	margin-top: 10px;
+}
+.user-field{
+	width: 100%;
+	text-align: center;
+}
+.confirm-form{
+	text-align: center;
+}
+.userfield{
+	width: 25%;
+	text-align:center;
+}
+.homepage{
+	margin-left: 40%;
+}
+.item_how{
+	float: left;
+}
+
+
